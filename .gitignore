@@ -1,0 +1,30 @@
+# Logs
+*.log
+npm-debug.log*
+
+# debug ignore
+/output
+/dist
+
+# FE ignore
+node_modules
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+# IDE ignore
+.idea
+.node_repl_history
+*.iml
+.eslintcache
+.vscode
+# dora 的配置文件
+gitcafe.yml
+
+# yarn3
+.yarn
+
+es
+es6
+esm

@@ -1,0 +1,166 @@
+@import 'vars.less';
+
+#react-minder-craft {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 0;
+    background-color: #F7F7F9;
+    // min-width: 800px;
+
+    * [disabled] {
+        pointer-events: none;
+    }
+
+    div.minder-editor-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        // top: 127px;
+        font-family: Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+        transition: top ease-in-out 0.3s;
+        border-top: 1px solid #E8E9EB;
+    }
+    
+    div.minder-editor-panel {
+        padding: 14px;
+    }
+
+    .minder-editor {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .minder-viewer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .control-panel {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 250px;
+        bottom: 0;
+        border-left: 1px solid #ccc;
+    }
+
+    .minder-divider {
+        position: absolute;
+        top: 0;
+        right: 250px;
+        bottom: 0;
+        width: 2px;
+        background-color: #fbfbfb;
+        cursor: ew-resize;
+    }
+
+    .upload-image {
+        width: .1px;
+        height: .1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .panel-body {
+        padding: 10px;
+    }
+
+    .btn-group-vertical {
+        vertical-align: top;
+        margin: 5px;
+    }
+
+    // vender theme
+    // @import 'bootstrap.less';
+
+    // component style
+    @import "km-component.less";
+    // @import "append-node.less";
+    // @import "arrange.less";
+    // @import "color-panel.less";
+    // @import "front-operator.less";
+    // @import "note-editor.less";
+    // @import "operation.less";
+    // @import "priority-editor.less";
+    // @import "progress-editor.less";
+    // @import "resource-editor.less";
+    // @import "search-box.less";
+    // @import "search-btn.less";
+    // @import "style-operator.less";
+    // @import "layout.less";
+    // @import "top-tab.less";
+    // @import "undo-redo.less";
+    @import "navigator.less";
+    @import "custom-area.less";
+    @import "detail-previewer.less";
+    // antd dropdown without any style
+    // @import "hyperlink.less";
+    // @import "image-btn.less";
+    // @import "note-btn.less";
+    // @import "expand-level.less";
+    // @import "select-all.less";
+
+    // common style
+    // @import "tool-group.less";
+
+    // override antd
+    .ant-tabs {
+        line-height: 1;
+    }
+
+    .ant-spin-nested-loading {
+        height: 100%;
+        .ant-spin-container {
+            height: 100%;
+        }
+    }
+
+    .ant-spin-blur {
+        opacity: 0.1;
+    }
+
+    .ant-form-item-label > label {
+        display: inline-flex;
+        margin-bottom: 0px;
+    }
+
+    // override bootstrap
+    .btn-default {
+        box-shadow: inherit;
+    }
+}
+
+// 全局样式
+.km-option-icon {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.km-option-icon.circle {
+    border-radius: 50%;
+}
+
+.km-option-icon.rect {
+    border-radius: 2px;
+}
+
+// antd dropdown can not is below of id selector
+@import "template-list.less";
+// @import "theme-list.less";

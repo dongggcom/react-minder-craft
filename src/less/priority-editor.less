@@ -1,0 +1,22 @@
+.priority-sprite(@count) when (@count >= 0) {
+    .priority-sprite(@count - 1);
+    &.priority-@{count} {
+        background-position: 0 (-20px * (@count - 1));
+    }
+}
+
+.km-priority {
+    width: 57px;
+
+    .km-priority-item {
+        margin: 0 1px;
+        padding: 1px;
+
+        .km-priority-icon {
+            .priority-sprite(9);
+
+            background: url('@{imgUrl}/iconpriority.png') repeat-y;
+            background-color: transparent;
+        }
+    }
+}

@@ -1,0 +1,44 @@
+.card-container {
+    p {
+        margin: 0;
+    }
+
+    & > .ant-tabs > .ant-tabs-nav {
+        margin-bottom: 0px;
+    }
+    & > .ant-tabs-card {
+        border-bottom: 1px solid #dbdbdb;
+        background: #f5f5f5;
+
+        .ant-tabs-content {
+            height: 60px;
+            margin-top: -16px;
+
+            & > .ant-tabs-tabpane {
+                padding: 0;
+                background: #fff;
+            }
+        }
+
+        & > .ant-tabs-nav::before {
+            display: none;
+        }
+
+        .ant-tabs-tab {
+            background: transparent;
+            border-color: transparent;
+        }
+
+        .ant-tabs-tab-active {
+            background: #fff;
+            border-color: #fff;
+        }
+    }
+}
+
+#components-tabs-demo-card-top .code-box-demo {
+    padding: 24px;
+    overflow: hidden;
+    background: #f5f5f5;
+}
+

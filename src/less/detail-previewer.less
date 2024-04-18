@@ -1,0 +1,31 @@
+.detail-previewer-content {
+    position: absolute;
+    background: #fff;
+    padding: 5px 15px;
+    border-radius: 2px;
+    max-width: 400px;
+    max-height: 200px;
+    overflow: auto;
+    z-index: 10;
+    box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+    word-break: break-all;
+}
+.detail-previewer-arrow {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    overflow: hidden;
+    background: 0 0;
+    pointer-events: none;
+    bottom: 0px;
+    z-index: 10;
+
+    .detail-previewer-arrow-content {
+        box-shadow: 3px 3px 7px #00000012;
+        transform: translateY(-11px) rotate(45deg);
+        width: 15px;
+        height: 15px;
+        background: white;
+        margin: auto
+    }
+}
