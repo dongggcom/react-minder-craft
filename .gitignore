@@ -25,6 +25,10 @@ gitcafe.yml
 # yarn3
 .yarn
 
+# yalc
+.yalc
+yalc.lock
+
 es
 es6
 esm

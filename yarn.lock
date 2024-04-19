@@ -12249,6 +12249,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"quick-click-menu@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "quick-click-menu@npm:1.0.0"
+  checksum: 629d77197f9924716058495d802462afd7c099f8d2a0b4f55c579ca887f7815122a2291b343e4c5fdc4662ddbea8cf2f97bf7ab3ee11764d3b67a2a7be6ca608
+  languageName: node
+  linkType: hard
+
 "quick-lru@npm:^4.0.1":
   version: 4.0.1
   resolution: "quick-lru@npm:4.0.1"
@@ -12924,6 +12931,7 @@ __metadata:
     node-notifier: ^10.0.0
     postcss-loader: ^6.1.1
     prettier: ^2.2.1
+    quick-click-menu: ^1.0.0
     react: 17
     react-color: ^2.19.3
     react-dom: 17

@@ -1,6 +1,6 @@
 {
   "name": "react-minder-craft",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "refactor kityminder-editor in react",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,6 @@
     "build:es": "babel src -d es",
     "build:prod": "webpack --progress --config config/webpack.build.config.js",
     "lint": "skr lint",
-    "prepublish": "yarn build",
     "lint:fix": "skr lint --fix",
     "style:fix": "stylelint src/**/*.less --fix --config node_modules/@reskript/config-lint/config/stylelint.js",
     "push:cr": "git push origin HEAD:refs/for/$(git symbolic-ref --short -q HEAD)",
@@ -98,6 +97,7 @@
     "less": "^4.1.2",
     "lodash": "^4.17.21",
     "marked": "^3.0.4",
+    "quick-click-menu": "^1.0.0",
     "react-color": "^2.19.3"
   },
   "peerDependencies": {

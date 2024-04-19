@@ -14,6 +14,7 @@ import getAsyncGetNodesProps from './lib/getAsyncGetNodesProps';
 import getUndoButtonProps from './lib/getUndoButtonProps';
 import useDefaultUsed from './hooks/useDefaultUsed';
 import useLoadData from './hooks/useLoadData';
+import useQuickClickMenu, {getNodeOperateQuickClickMenuOption} from './hooks/useQuickClickMenu';
 
 const isModelOne = node => node?.data.modelType === 'one';
 
@@ -65,11 +66,20 @@ const Demo = () => {
     const [defaultUsed] = useDefaultUsed();
     const refs = useRef(null);
 
+    useQuickClickMenu(
+        refs.current?.getEditor(),
+        getNodeOperateQuickClickMenuOption(
+            [
+                '子节点:Tab:AppendChildNode:one',
+                '兄弟:Enter:AppendSiblingNode:bro',
+                '删除:Delete|Backspace:RemoveNode',
+            ],
+            refs.current?.getEditor()
+        )
+    );
+
     useEffect(() => {
-        if (refs.current === null) {
-            return;
-        }
-        const editor = refs.current.getEditor();
+        const editor = refs.current?.getEditor();
         if (!editor) {
             return;
         }
