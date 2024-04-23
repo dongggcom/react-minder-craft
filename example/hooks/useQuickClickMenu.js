@@ -80,6 +80,11 @@ function useQuickClickMenu(editor, options) {
             const minder = editor.minder;
             const qrm = new QuickClickMenu(options, editor.container);
 
+            // 菜单不受滚动影响
+            qrm.render.layout.addEventListener('mousewheel', e => {
+                e.stopPropagation();
+            }, false);
+
             // 右键编辑框出现
             editor.fsm.when('normal -> hotbox', () => {
                 const node = minder.getSelectedNode();

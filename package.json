@@ -13,6 +13,8 @@
     "lint:fix": "skr lint --fix",
     "style:fix": "stylelint src/**/*.less --fix --config node_modules/@reskript/config-lint/config/stylelint.js",
     "push:cr": "git push origin HEAD:refs/for/$(git symbolic-ref --short -q HEAD)",
+    "publish:version": "sh scripts/publish.sh",
+    "puv": "npm run publish:version",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -48,6 +50,7 @@
       "url": "https://github.com/dongggcom/react-minder-craft/blob/main/LICENSE"
     }
   ],
+  "repository": {},
   "devDependencies": {
     "@babel/cli": "^7.13.14",
     "@babel/core": "^7.13.15",
@@ -97,7 +100,7 @@
     "less": "^4.1.2",
     "lodash": "^4.17.21",
     "marked": "^3.0.4",
-    "quick-click-menu": "^1.0.0",
+    "quick-click-menu": "^1.0.1",
     "react-color": "^2.19.3"
   },
   "peerDependencies": {
