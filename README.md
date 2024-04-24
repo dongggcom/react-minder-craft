@@ -11,7 +11,7 @@ yarn install
 ```jsx
 import React from 'react';
 import 'react-minder-craft/dist/css/index.css';
-import ReactMinderCraft from 'react-minder-craft/es';
+import ReactMinderCraft from 'react-minder-craft/dist/es';
 
 
 export default () => <ReactMinderCraft />
