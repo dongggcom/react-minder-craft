@@ -45,6 +45,7 @@ const ExpandLevel = ({editor}) => {
                     }
                 }
             });
+            minder.refresh(100);
         },
         [minder]
     );
@@ -53,14 +54,15 @@ const ExpandLevel = ({editor}) => {
         ({key}) => {
             if (key === 'toSuite') {
                 expandToSuite();
-            } else if (key === 'toAll' && expandAll) {
-                expandAll();
-            } else if (levels.includes(key) && expandLevel) {
+            } else if (key === 'toAll') {
+                expandAll?.();
+            } else if (levels.includes(key)) {
                 const node = minder.getSelectedNode();
-                expandLevel(node, key);
+                expandLevel?.(node, Number(key)) ?? minder.execCommand('ExpandToLevel', Number(key));
             } else if (key === 'auto') {
                 expandNode();
             }
+            minder.fire('contentchange');
         },
         [expandAll, expandLevel, expandNode, expandToSuite, minder]
     );
@@ -74,7 +76,7 @@ const ExpandLevel = ({editor}) => {
                 <Menu onClick={onClick}>
                     <Menu.Item key={'auto'}>展开/收起</Menu.Item>
                     {levels.map(level => (
-                        <Menu.Item key={level}>{`展开 ${level} 层`}</Menu.Item>
+                        <Menu.Item key={level}>{`展开至 ${level} 层`}</Menu.Item>
                     ))}
                 </Menu>
             }

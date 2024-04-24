@@ -36,8 +36,6 @@ define(require => {
              */
             expand() {
                 this.setData(EXPAND_STATE_DATA, STATE_EXPAND);
-                this.renderTree().getMinder().layout(100);
-                this.getMinder().fire('contentchange');
                 return this;
             },
 
@@ -46,8 +44,6 @@ define(require => {
              */
             collapse() {
                 this.setData(EXPAND_STATE_DATA, STATE_COLLAPSE);
-                this.renderTree().getMinder().layout(100);
-                this.getMinder().fire('contentchange');
                 return this;
             },
 
@@ -210,17 +206,18 @@ define(require => {
             },
 
             initEvent(node) {
-                this.on('mousedown', e => {
+                this.on('mousedown', async e => {
                     minder.select([node], true);
                     // 增加事件
                     if (isHasChildDataWithoutChildren(node)) {
-                        node.expandAsyncImport();
+                        await node.expandAsyncImport();
                     } else if (node.isExpanded()) {
                         node.collapse();
                     } else {
                         node.expand();
                     }
-
+                    node.renderTree().getMinder().layout(100);
+                    node.getMinder().fire('contentchange');
                     e.stopPropagation();
                     e.preventDefault();
                 });
