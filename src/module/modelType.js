@@ -66,7 +66,7 @@ define(require => {
             },
 
             shouldRender(node) {
-                return node.getData(NODE_KEY);
+                return node.getData(NODE_KEY) && MAP[node.getData(NODE_KEY)];
             },
 
             updateToTop(icon, node, box) {
