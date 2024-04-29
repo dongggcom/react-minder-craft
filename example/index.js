@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import '../src/less/index.less';
 import '../src/less/vender.less';
 import ReactKityMinder from '../src';
+import './style/index.less';
 import getContext from './lib/getContext';
 import imageClick from './lib/imageClick';
 import registerMinderEvent from './lib/registerMinderEvent';

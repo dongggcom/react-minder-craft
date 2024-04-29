@@ -1,6 +1,5 @@
 import {useEffect} from 'react';
 import QuickClickMenu from 'quick-click-menu';
-import 'quick-click-menu/dist/style.less';
 
 function appendAction(minder, command, modelType) {
     minder.execCommand(command, modelType || '新节点');
