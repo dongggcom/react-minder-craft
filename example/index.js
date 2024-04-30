@@ -13,6 +13,7 @@ import showComment from './lib/showComment';
 import appendNode, {appendNodeConditionProps} from './lib/appendNode';
 import getAsyncGetNodesProps from './lib/getAsyncGetNodesProps';
 import getUndoButtonProps from './lib/getUndoButtonProps';
+import hidePannelButton, {pannelClassName} from './lib/hidePannelButton';
 import useDefaultUsed from './hooks/useDefaultUsed';
 import useLoadData from './hooks/useLoadData';
 import useQuickClickMenu, {getNodeOperateQuickClickMenuOption} from './hooks/useQuickClickMenu';
@@ -106,6 +107,8 @@ const Demo = () => {
         fsmSubscribe(editor);
         // 注册事件
         registerMinderEvent(editor);
+        // 隐藏面板上的按钮
+        hidePannelButton(pannelClassName.appendDescNode);
     }, [data]
     );
 
