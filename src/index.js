@@ -80,7 +80,7 @@ const App = (props, ref) => {
             editor.minder.importJson(dataSource);
         }
         if (editor) {
-            editor.minder.useTheme(memory.get('theme') ?? null);
+            editor.minder.useTheme(memory.get('theme') ?? 'newfashion');
             editor.minder.useTemplate(memory.get('template') ?? null);
         }
     }, [dataSource, editor]

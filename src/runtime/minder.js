@@ -7,6 +7,11 @@
  * @copyright: Baidu FEX, 2014
  */
 define((require, exports, module) => {
+    /**
+     * 加载主题
+     */
+    require('../theme');
+
     const Minder = require('../minder');
 
     function MinderRuntime() {

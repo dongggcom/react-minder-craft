@@ -247,13 +247,15 @@ define(require => {
 
                 }
 
-                text.setX(paddingX).fill(color.dec('l', 70));
+                text.setX(paddingX).fill(color.dec('l', 40));
 
                 rect.setPosition(0, box.y - paddingY);
                 this.width = Math.round(box.width + paddingX * 2);
                 this.height = Math.round(box.height + paddingY * 2);
                 rect.setSize(this.width, this.height);
                 rect.fill(color);
+                rect.setRadius(4);
+                rect.stroke(color.dec('l', 10), 1);
             },
         });
 
