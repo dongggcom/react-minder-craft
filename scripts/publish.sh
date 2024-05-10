@@ -4,7 +4,7 @@ npm run build &> /dev/null && echo ">> build success!"
 
 cp src/package-publish.json $OUTPUT_DIR/package.json
 
-cd $OUTPUT_DIR
+cd src
 
 old_version=$(npm view react-minder-craft@latest version)
 
@@ -19,5 +19,6 @@ if [[ $old_version == $current_version ]]; then
     echo ">> set new version: ${new_version}"
 fi
 
+cd ../$OUTPUT_DIR
 
 npm publish
