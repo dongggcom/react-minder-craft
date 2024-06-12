@@ -12,6 +12,22 @@ import bindEventProxy from './tool/bindEventProxy';
 const MemoedTopTab = memo(TopTab);
 const LANGUAGE = 'zh-cn';
 
+function getDefaultTheme() {
+    const themeList = Object.keys(window.kityminder.Minder.getThemeList());
+    if (themeList.includes(memory.get('theme'))) {
+        return memory.get('theme');
+    }
+    return 'newfashion';
+}
+
+function getDefaultTemplate() {
+    const templateList = Object.keys(window.kityminder.Minder.getTemplateList());
+    if (templateList.includes(memory.get('template'))) {
+        return memory.get('template');
+    }
+    return null;
+}
+
 const App = (props, ref) => {
     const {
         customArea,
@@ -80,8 +96,8 @@ const App = (props, ref) => {
             editor.minder.importJson(dataSource);
         }
         if (editor) {
-            editor.minder.useTheme(memory.get('theme') ?? 'newfashion');
-            editor.minder.useTemplate(memory.get('template') ?? null);
+            editor.minder.useTheme(getDefaultTheme());
+            editor.minder.useTemplate(getDefaultTemplate());
         }
     }, [dataSource, editor]
     );
