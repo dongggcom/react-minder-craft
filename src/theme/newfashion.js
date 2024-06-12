@@ -10,7 +10,7 @@ define(() => {
     function generate(compat) {
         const mainStrockColor = '#91caff'; // hsl(209, 100, 78)
         const mainTextColor = '#108ee9'; // hsl(217, 92, 44)
-        const mainBgColor = '#e6f4ff'; // hsl(206, 100, 95)
+        const mainBgColor = '#EAF1FF'; // hsl(206, 100, 95)
 
         const h = 204;
 
