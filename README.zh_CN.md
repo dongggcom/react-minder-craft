@@ -1,9 +1,10 @@
 ## react-minder-craft 
-[kityminder-editor](https://github.com/fex-team/kityminder-editor) 是 `React` 重构版本。
+基于 [ant-design](https://github.com/ant-design/ant-design)，对 [kityminder-editor](https://github.com/fex-team/kityminder-editor) 进行 `React` 重构版本。
 
 用更现代的 UI 组件库改善用户体验。
 
-> 这里使用了 `antd`，其他组件库仍然可以替换。
+[English](./README.md) | 简体中文
+
 
 ## 安装
 
@@ -27,7 +28,11 @@ export default () => <ReactMinderCraft />
 yarn start
 ```
 
-更多样例查看 `example` 目录。也可以查看开发细节 [handbook](https://github.com/dongggcom/react-minder-craft/doc/handbook.md)
+更多样例查看 `example` 目录。也可以查看开发细节 [handbook](./doc/handbook.md)
+
+## 屏幕截图
+
+![screenshot](./doc/images/screenshot.png)
 
 ## F&Q
 

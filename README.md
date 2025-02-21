@@ -1,5 +1,9 @@
 ## react-minder-craft 
-A React adaptation of  [kityminder-editor](https://github.com/fex-team/kityminder-editor) .
+Rebuild [kityminder-editor](https://github.com/fex-team/kityminder-editor) with React, base on [ant design](https://github.com/ant-design/ant-design).
+
+English | [简体中文](./README.zh-CN.md)
+
+> base on antd design
 
 ## Installation
 
@@ -23,7 +27,11 @@ export default () => <ReactMinderCraft />
 yarn start
 ```
 
-For more detail instructions, refer to `example` directory. Here are some development note: [handbook](https://github.com/dongggcom/react-minder-craft/doc/handbook.md)
+For more detail instructions, refer to `example` directory. Here are some development note: [handbook](./doc/handbook.md)
+
+## Screenshots
+
+![screenshot](./doc/images/screenshot.png)
 
 
 ## F&Q
