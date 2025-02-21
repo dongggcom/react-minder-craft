@@ -2,7 +2,8 @@
 define(require => {
     // 调整加载顺序会更改图标顺序
     require('./core');
-    require('./text');
+    // require('./text');
+    require('./reactiveText');
     require('./font');
     require('./priority');
     require('./resource');
@@ -19,4 +20,5 @@ define(require => {
     require('./zoom');
     require('./select');
     require('./keynav');
+    require('./longTextNode');
 });

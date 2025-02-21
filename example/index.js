@@ -14,6 +14,7 @@ import appendNode, {appendNodeConditionProps} from './lib/appendNode';
 import getAsyncGetNodesProps from './lib/getAsyncGetNodesProps';
 import getUndoButtonProps from './lib/getUndoButtonProps';
 import hidePannelButton, {pannelClassName} from './lib/hidePannelButton';
+import longTextSplit from './lib/longTextSplit';
 import useDefaultUsed from './hooks/useDefaultUsed';
 import useLoadData from './hooks/useLoadData';
 import useQuickClickMenu, {getNodeOperateQuickClickMenuOption} from './hooks/useQuickClickMenu';
@@ -109,6 +110,8 @@ const Demo = () => {
         registerMinderEvent(editor);
         // 隐藏面板上的按钮
         hidePannelButton(pannelClassName.appendDescNode);
+        // 长文本分割
+        longTextSplit(editor, getContext().maxTextLength);
     }, [data]
     );
 

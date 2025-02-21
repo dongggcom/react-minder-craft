@@ -11,6 +11,7 @@ define((require, exports, module) => {
     require('../tool/innertext');
 
     const Debug = require('../tool/debug');
+    const {isLastOfNodeLongTextExpand, getShownText, isLongTextNode} = require('../tool/nodeType');
     const debug = new Debug('input');
     // debugger
     function InputRuntime() {
@@ -23,15 +24,34 @@ define((require, exports, module) => {
 
         // setup everything to go
         setupReciverElement();
-        setupFsm();
         // setupHotbox();
 
         // expose editText()
         this.editText = editText;
+        this.currentNode = null;
 
+        /**
+         * 增加对字体的鉴别，以保证用户在编辑状态ctrl/cmd + b/i所触发的加粗斜体与显示一致
+         * @editor Naixor
+         * @Date 2015-12-2
+         */
+        const enterInputMode = () => {
+            const node = minder.getSelectedNode();
+            if (node) {
+                this.currentNode = node;
+                const fontSize = node.getData('font-size') || node.getStyle('font-size');
+                receiverElement.style.fontSize = fontSize + 'px';
+                receiverElement.style.minWidth = 0;
+                receiverElement.style.minWidth = receiverElement.clientWidth + 'px';
+                receiverElement.style.fontWeight = node.getData('font-weight') || '';
+                receiverElement.style.fontStyle = node.getData('font-style') || '';
+                receiverElement.classList.add('input');
+                receiverElement.focus();
+            }
+        };
 
         // listen the fsm changes, make action.
-        function setupFsm() {
+        const setupFsm = () => {
 
             // when jumped to input mode, enter
             fsm.when('* -> input', enterInputMode);
@@ -50,6 +70,11 @@ define((require, exports, module) => {
 
             // lost focus to commit
             receiver.onblur(e => {
+                if (this.currentNode && this.currentNode !== minder.getSelectedNode()) {
+                    fsm.jump('normal', 'input-cancel');
+                    return;
+                }
+
                 if (fsm.state() == 'input') {
                     fsm.jump('normal', 'input-commit');
                 }
@@ -69,6 +94,8 @@ define((require, exports, module) => {
             });
         }
 
+
+        setupFsm();
 
         // let the receiver follow the current selected node position
         function setupReciverElement() {
@@ -138,24 +165,6 @@ define((require, exports, module) => {
             receiver.selectAll();
         }
 
-        /**
-         * 增加对字体的鉴别，以保证用户在编辑状态ctrl/cmd + b/i所触发的加粗斜体与显示一致
-         * @editor Naixor
-         * @Date 2015-12-2
-         */
-        function enterInputMode() {
-            const node = minder.getSelectedNode();
-            if (node) {
-                const fontSize = node.getData('font-size') || node.getStyle('font-size');
-                receiverElement.style.fontSize = fontSize + 'px';
-                receiverElement.style.minWidth = 0;
-                receiverElement.style.minWidth = receiverElement.clientWidth + 'px';
-                receiverElement.style.fontWeight = node.getData('font-weight') || '';
-                receiverElement.style.fontStyle = node.getData('font-style') || '';
-                receiverElement.classList.add('input');
-                receiverElement.focus();
-            }
-        }
 
         /**
          * 按照文本提交操作处理
@@ -283,7 +292,14 @@ define((require, exports, module) => {
 
             text = text.replace(/^\n*|\n*$/g, '');
             text = text.replace(new RegExp('(\n|\r|\n\r)(\u0020|' + String.fromCharCode(160) + '){4}', 'g'), '$1\t');
-            minder.getSelectedNode().setText(text);
+
+            // 判断是否是展开的长文本节点，如果是则直接修改其text，否则仍用原来的
+            minder.getSelectedNode().setText(getShownText(minder, text));
+
+            // 判断是否是展开的长文本节点，如果不是，修改长文本节点值
+            isLongTextNode(minder.getSelectedNode())
+                && !isLastOfNodeLongTextExpand(minder) && minder.getSelectedNode().setData('longText', text);
+
             if (isBold) {
                 minder.queryCommandState('bold') || minder.execCommand('bold');
             } else {
@@ -312,7 +328,8 @@ define((require, exports, module) => {
                     function importText(node, json, minder) {
                         const data = json.data;
 
-                        node.setText(data.text || '');
+                        // 判断是否是展开的长文本节点，如果是则直接修改其text，否则仍用原来的
+                        node.setText(getShownText(data.text || ''));
 
                         const childrenTreeData = json.children || [];
                         for (let i = 0; i < childrenTreeData.length; i++) {
@@ -337,7 +354,14 @@ define((require, exports, module) => {
             }
         }
 
-        function commitInputResult() {
+        // TODO: 内容如果有 longText 回填 longText
+        const commitInputResult = () => {
+            // 如果节点变了 则不更新
+            if (this.currentNode && this.currentNode !== minder.getSelectedNode()) {
+                fsm.jump('normal', 'input-cancel');
+                exitInputMode();
+                return;
+            }
             /**
              * @Desc: 进行如下处理：
              *             根据用户的输入判断是否生成新的节点
@@ -359,6 +383,7 @@ define((require, exports, module) => {
             }, 0);
             const node = minder.getSelectedNode();
 
+            // TODO: 回填 longText 内容，并恢复缩略状态
             textNodes = commitInputText(textNodes);
             commitInputNode(node, textNodes);
 
@@ -387,6 +412,7 @@ define((require, exports, module) => {
 
             if (!planed.timer) {
                 planed.timer = setTimeout(() => {
+                    // FIXME: 这里在边界的节点初次进入位置时，会计算错误
                     const box = focusNode.getRenderBox('TextRenderer');
                     receiverElement.style.left = Math.round(box.x) + 'px';
                     receiverElement.style.top = (debug.flaged ? Math.round(box.bottom + 30) : Math.round(box.y)) + 'px';

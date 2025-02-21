@@ -123,7 +123,15 @@ define(() => {
             'events': {
                 'mousedown'(e) {
 
-                    const downNode = e.getTargetNode();
+                    let downNode = null;
+
+                    // 针对 foreignObject 节点，需要额外处理一下
+                    if (e.originEvent.target instanceof HTMLElement) {
+                        const target = e.originEvent.target.closest('g');
+                        downNode = target.shape.targetNode ?? null;
+                    } else {
+                        downNode = e.getTargetNode();
+                    }
 
                     // 没有点中节点：
                     //     清除选中状态，并且标记选区开始位置
@@ -156,7 +164,15 @@ define(() => {
                 },
                 'mousemove': marqueeActivator.selectMove,
                 'mouseup'(e) {
-                    const upNode = e.getTargetNode();
+                    let upNode = null;
+
+                    // 针对 foreignObject 节点，需要额外处理一下
+                    if (e.originEvent.target instanceof HTMLElement) {
+                        const target = e.originEvent.target.closest('g');
+                        upNode = target.shape.targetNode ?? null;
+                    } else {
+                        upNode = e.getTargetNode();
+                    }
 
                     // 如果 mouseup 发生在 lastDownNode 外，是无需理会的
                     if (upNode && upNode === lastDownNode) {

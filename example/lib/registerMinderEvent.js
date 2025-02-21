@@ -99,6 +99,14 @@ function registerMinderEvent(editor) {
     // km.on('add-resource', e => {
     //     log('add-resource', e);
     // });
+
+    // 长文本省略号
+    km.on('long-text-onclick', e => {
+        const node = e.minder.getSelectedNode();
+        const text = node.getText();
+
+        km.execCommand('LongText', node.getData('longText') === 'expand' ? text : 'expand');
+    });
 }
 
 export default registerMinderEvent;

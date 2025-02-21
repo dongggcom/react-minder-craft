@@ -8,7 +8,7 @@ define(require => {
     const Command = require('kityminder-core/src/core/command');
     const Module = window.kityminder.Module;
 
-    const TextRenderer = require('./text');
+    const TextRenderer = require('./reactiveText');
 
     function getNodeDataOrStyle(node, name) {
         return node.getData(name) || node.getStyle(name);
@@ -18,6 +18,7 @@ define(require => {
         return shape instanceof window.kity.Text;
     }
 
+    // 这个只对 text 节点有效
     TextRenderer.registerStyleHook((node, textGroup) => {
         const dataColor = node.getData('color');
         const selectedColor = node.getStyle('selected-color');
@@ -27,17 +28,26 @@ define(require => {
         const fontFamily = getNodeDataOrStyle(node, 'font-family');
         const fontSize = getNodeDataOrStyle(node, 'font-size');
 
-        textGroup.fill(foreColor);
+        if (textGroup.isForeignObjectGroup) {
+            textGroup.setTextStyle({
+                color: foreColor,
+                'family': fontFamily,
+                'size': fontSize,
+            });
+        }
+        else {
+            textGroup.fill(foreColor);
 
-        textGroup.eachItem((index, item) => {
-            // 为富文本做处理
-            if (isTextShape(item.node.shape)) {
-                item.setFont({
-                    'family': fontFamily,
-                    'size': fontSize,
-                });
-            }
-        });
+            textGroup.eachItem((index, item) => {
+                // 为富文本做处理
+                if (isTextShape(item.node.shape)) {
+                    item.setFont({
+                        'family': fontFamily,
+                        'size': fontSize,
+                    });
+                }
+            });
+        }
     });
 
 
