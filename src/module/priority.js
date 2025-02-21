@@ -28,9 +28,9 @@ define(require => {
         };
 
         // jscs:disable maximumLineLength
-        const BACK_PATH = 'M0,13c0,3.866,3.134,7,7,7h6c3.866,0,7-3.134,7-7V7H0V13z';
-        const MASK_PATH =
-            'M20,10c0,3.866-3.134,7-7,7H7c-3.866,0-7-3.134-7-7V7c0-3.866,3.134-7,7-7h6c3.866,0,7,3.134,7,7V10z';
+        // const BACK_PATH = 'M0,13c0,3.866,3.134,7,7,7h6c3.866,0,7-3.134,7-7V7H0V13z';
+        // const MASK_PATH =
+        //     'M20,10c0,3.866-3.134,7-7,7H7c-3.866,0-7-3.134-7-7V7c0-3.866,3.134-7,7-7h6c3.866,0,7,3.134,7,7V10z';
 
         const PRIORITY_DATA = 'priority';
 
@@ -50,8 +50,9 @@ define(require => {
             },
 
             create() {
-                const back = new kity.Path().setPathData(BACK_PATH).setTranslate(0.5, 0.5);
-                const mask = new kity.Path().setPathData(MASK_PATH).setOpacity(0.8).setTranslate(0.5, 0.5);
+                // const back = new kity.Path().setPathData(BACK_PATH).setTranslate(0.5, 0.5);
+                // const mask = new kity.Path().setPathData(MASK_PATH).setOpacity(0.8).setTranslate(0.5, 0.5);
+                const back = new kity.Rect(20, 20, 0, 0, 4);
 
                 const number = new kity.Text()
                     .setX(this.width / 2 - 0.5).setY(this.height / 2)
@@ -61,22 +62,22 @@ define(require => {
                     .setFontSize(12)
                     .fill('white');
 
-                this.addShapes([back, mask, number]);
-                this.mask = mask;
+                this.addShapes([back, number]);
+                // this.mask = mask;
                 this.back = back;
                 this.number = number;
             },
 
             setValue(value) {
                 const back = this.back;
-                const mask = this.mask;
+                // const mask = this.mask;
                 const number = this.number;
                 const content = value.toString().toUpperCase();
                 const color = PRIORITY_COLORS[content];
 
                 if (color) {
-                    back.fill(color[1]);
-                    mask.fill(color[0]);
+                    back.fill(color[0]);
+                    // mask.fill(color[0]);
                 }
 
                 number.setContent(content);

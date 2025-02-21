@@ -3,7 +3,14 @@ define((require, exports, module) => {
      * 加载 module
      */
     require('./module');
-
+    /**
+     * 加载主题
+     */
+    require('./theme/newfashion');
+    /**
+     * 加载模板
+     */
+    require('./template/spider');
     /**
      * 运行时
      */

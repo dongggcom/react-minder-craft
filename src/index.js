@@ -25,7 +25,7 @@ function getDefaultTemplate() {
     if (templateList.includes(memory.get('template'))) {
         return memory.get('template');
     }
-    return null;
+    return 'spider';
 }
 
 const App = (props, ref) => {

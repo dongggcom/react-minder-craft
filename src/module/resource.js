@@ -71,8 +71,10 @@ define(require => {
                 }
 
                 // 资源过多，找不到可用索引颜色，统一返回哈希函数得到的颜色
-                return RESOURCE_COLOR_SERIES[colorMapping[resource]]
-                || kity.Color.createHSL(Math.floor(this.getHashCode(resource) / 0x7FFFFFFF * 359), 100, 85);
+                // return RESOURCE_COLOR_SERIES[colorMapping[resource]]
+                // || kity.Color.createHSL(Math.floor(this.getHashCode(resource) / 0x7FFFFFFF * 359), 65, 56);
+                // 返回固定色值
+                return kity.Color.createHSL(216, 91, 58);
             },
 
             /**
@@ -215,7 +217,7 @@ define(require => {
             constructor() {
                 this.callBase();
 
-                this.rect = new kity.Rect().setRadius(4);
+                this.rect = new kity.Rect(10, 10, 0, 0, 4);
                 this.text = new kity.Text()
                     .setFontSize(12)
                     .setVerticalAlign('middle');
@@ -247,15 +249,14 @@ define(require => {
 
                 }
 
-                text.setX(paddingX).fill(color.dec('l', 40));
+                // text.setX(paddingX).fill(color.dec('l', 70));
+                text.setX(paddingX).fill('white');
 
                 rect.setPosition(0, box.y - paddingY);
                 this.width = Math.round(box.width + paddingX * 2);
                 this.height = Math.round(box.height + paddingY * 2);
                 rect.setSize(this.width, this.height);
                 rect.fill(color);
-                rect.setRadius(4);
-                rect.stroke(color.dec('l', 10), 1);
             },
         });
 

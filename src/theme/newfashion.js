@@ -1,25 +1,24 @@
-/* eslint-disable no-undef */
+// eslint-disable-next-line no-undef
 define(() => {
     const kity = window.kity;
-    const theme = window.kityminder.Theme;
+    const Minder = window.kityminder.Minder;
 
     function hsl(h, s, l) {
         return kity.Color.createHSL(h, s, l);
     }
 
-    function generate(compat) {
-        const mainStrockColor = '#91caff'; // hsl(209, 100, 78)
-        const mainTextColor = '#108ee9'; // hsl(217, 92, 44)
-        const mainBgColor = '#EAF1FF'; // hsl(206, 100, 95)
-
-        const h = 204;
-
+    function generate(h, compat) {
+        const mainDeepColor = hsl(h, 100, 60);
+        const mainColor = hsl(h, 100, 75);
+        const mainLightColor = hsl(h, 100, 96);
+        const borderColor = hsl(h, 100, 89);
+        const selectedColor = hsl(h, 100, 30);
         return {
             'background': '#fbfbfb',
 
             'root-color': 'white',
-            'root-background': mainTextColor,
-            'root-stroke': mainStrockColor,
+            'root-background': mainDeepColor,
+            'root-stroke': mainDeepColor,
             'root-font-size': 16,
             'root-padding': compat ? [6, 12] : [12, 24],
             'root-margin': compat ? 10 : [30, 100],
@@ -27,8 +26,8 @@ define(() => {
             'root-space': 10,
 
             'main-color': 'black',
-            'main-background': mainBgColor,
-            'main-stroke': mainStrockColor,
+            'main-background': mainLightColor,
+            'main-stroke': borderColor,
             'main-stroke-width': 1,
             'main-font-size': 14,
             'main-padding': [6, 20],
@@ -45,22 +44,22 @@ define(() => {
             'sub-radius': 5,
             'sub-space': 5,
 
-            'connect-color': mainStrockColor,
+            'connect-color': borderColor,
             'connect-width': 1,
             'connect-radius': 5,
 
-            'selected-stroke': hsl(h, 26, 30),
-            'selected-stroke-width': '3',
+            'selected-stroke': selectedColor,
+            'selected-stroke-width': '2',
             'blur-selected-stroke': hsl(h, 10, 60),
 
             'marquee-background': hsl(h, 100, 80).set('a', 0.1),
-            'marquee-stroke': mainStrockColor,
+            'marquee-stroke': mainDeepColor,
 
-            'drop-hint-color': hsl(h, 26, 35),
+            'drop-hint-color': borderColor,
             'drop-hint-width': 5,
 
-            'order-hint-area-color': mainBgColor,
-            'order-hint-path-color': mainStrockColor,
+            'order-hint-area-color': mainColor.set('a', 0.5),
+            'order-hint-path-color': mainColor,
             'order-hint-path-width': 3,
 
             'text-selection-color': hsl(h, 100, 20),
@@ -68,6 +67,11 @@ define(() => {
         };
     }
 
-    theme.register('newfashion', generate());
-    theme.register('newfashion-compat', generate(true));
+    const plans = {
+        blue: 220,
+    };
+
+    const themes = Minder.getThemeList();
+    themes.newfashion = generate(plans.blue);
+    themes['newfashion-compat'] = generate(plans.blue, true);
 });
